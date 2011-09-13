@@ -1,0 +1,76 @@
+XTerm*background: black
+XTerm*foreground: white
+!colors
+*foreground: #c0c0c0
+*background: #1a1a1a
+*cursorColor: orange
+*color0: #151515
+*color8: #505450
+*color1: #bf7979
+*color9: #f4a45f
+*color2: #97b26b
+*color10: #c5f779
+*color3: #cdcda1
+*color11: #ffffaf
+*color4: #4a5463
+*color12: #7d8794
+*color5: #9c3885
+*color13: #e628ba
+*color6: #88aadd
+*color14: #99ccff
+*color7: #ffffff
+*color15: #dedede
+
+! Emacs*Font: *helvetica-medium-r-normal--8*
+! Emacs*FontSet: *helvetica-medium-r-normal--8*
+! Emacs*userFont: *helvetica-medium-r-normal--8*
+! Emacs*systemFont: *helvetica-medium-r-normal--8*
+!Emacs.FontBackend: xft
+!Emacs.Font: Monaco-8
+
+Xft.dpi:96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.rgba: rgb
+
+! xterm ---------------------------------------------
+
+! urxvt ---------------------------------------------
+URxvt*termName: rxvt
+URxvt*keysym.Home: \033[1~
+URxvt*keysym.End: \033[4~
+
+URxvt.inheritPixmap: true
+URxvt.tintColor: white
+URxvt.shading: 40
+
+URxvt.visualBell: false
+URxvt.insecure: true
+URxvt.scrollBar: true
+URxvt.scrollBar_right: true
+URxvt.scrollstyle: plain
+URxvt.secondaryScroll: true
+URxvt.underlineColor: yellow
+
+URxvt.preeditType:OverTheSpot
+URxvt.multichar_encoding:utf8
+!URxvt.scrollBar:False
+URxvt.saveLines: 99999
+URxvt.geometry:100x36+240+240
+URxvt.font:xft:Monaco:size=10:antialias=true
+!urxvtperl
+!URxvt.perl-ext-common: default,tabbed,matcher
+! tabs ---
+!URxvt.tabbed.tab-fg: 12
+!URxvt.tabbed.tab-bg: 0
+!URxvt.tabbed.tabbar-fg: 4
+! colors ---
+URxvt.background:#1a1a1a
+URxvt.foreground:#C0C0C0
+URxvt.colorBD:yellow
+URxvt.colorUL:green
+URxvt.color12: #AAAAFF
+URxvt.cursorColor: orange
+
+!Xcursor*theme: Neutral

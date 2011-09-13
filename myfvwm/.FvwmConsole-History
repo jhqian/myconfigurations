@@ -1,0 +1,9 @@
+xpmroot $home/Desktop/background/jpb
+xpmroot $home/Desktop/background.jpb
+xpmroot $home/Desktop/background.jpg
+Exec exec rxvt
+Style "XSIM" HandleWidth 0
+FvwmIdent
+kill
+help
+?

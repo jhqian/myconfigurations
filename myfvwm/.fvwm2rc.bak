@@ -1,0 +1,81 @@
+EdgeResistance 250 100
+EdgeScroll 0 0 # disable mouse jumping between windows
+EdgeScroll 100 100
+ClickTime 750
+DeskTopSize 2x2 # 4 desktops
+ImagePath +:$HOME/.fvwm/icons # icon path
+
+Key 1 	  T    SC    MoveToPage 0 0 # shift+ctrl+1 will send the window whose title bar is sit by cursor at
+Key 2 	  T    SC    MoveToPage 0 1
+Key 3 	  T    SC    MoveToPage 1 0
+Key 4 	  T    SC    MoveToPage 1 1
+
+Key j 	  A    SC    GoToPage 0 0
+Key k 	  A    SC    GoToPage 0 1
+Key l 	  A    SC    GoToPage 1 0
+Key u 	  A    SC    GoToPage 1 1
+
+Key e 	  A    SC    Exec exec emacs
+Key f 	  A    SC    Exec exec firefox
+Key g 	  A    SC    Exec exec pidgin
+Key x 	  A    SC    Exec exec xterm
+
+Key c 	  A    SCM   Quit # shift+alt+ctrl+c: quit fvwm
+Key r 	  A    SCM   Restart # shift+alt+ctrl+r: restart fvwm
+Key c 	  WF   SC    Close # close current window
+Key i	  W    SC    Iconify # minimize current window
+Key p 	  W    SC    Maximize # maximize current window
+Key o 	  W    SC    RaiseLower # defocus currrent window
+
+Key F3 A A Module FvwmConsole
+
+CursorStyle ROOT 58
+CursorStyle TILTE 62
+CursorStyle STROKE 86
+
+# add close button to window
+Mouse 1 6      A     	Close
+ButtonStyle 6 16 20x20@1 30x20@1 50x40@1 70x20@1 80x20@1 80x30@0 60x50@0 80x80@0 70x80@0 50x60@0 30x80@0 20x80@0 20x70@0 40x50@1 20x30@0 20x20@1
+
+Mouse 1 4      A        Iconify
+
+DestroyFunc Maximize-Func2
+AddToFunc Maximize-Func2        "M" Maximize    100     0
++       "C" Maximize    80      0
++       "D" Maximize    100     100
+Mouse 3 2      A        Maximize-Func2
+
+##### Initialization Functions #####
+AddToFunc StartFunction
++ I Module FvwmButtons MainPanel
++ I Module FvwmAnimate
++ I Module FvwmTaskBar
++ I Exec exec xpmroot $[HOME]/.fvwm/background/background.png
+# + I Exec exec xclock
+
+
+DestroyFunc InitFunction
+AddToFunc InitFunction
++ I Exec exec xscreensaver -no-splash
+
+AddToFunc SessionInitFunction
++ I All (xpmroot) Close
+#+ I All (xclock) Close
+
+##### Menus #####
+#AddToMenu RootMenu   "RootMenu"    Title
+#+	  "Xterm"    Exec exec xterm
+#+	  "Top"	     Exec exec xterm -T Top -n Top -e Top
+#+	  	     "Internet"	     Popup Internet
+#+		     "Edit"	     Popup Edit
+#+ 		     "Other"	     Popup Other
+#+		     ""		     Nop
+#+		     "Exit Fvwm"     Popup Quit-Verify
+
+#AddToMenu Internet   "Internet"    Title
+#+	  "Firefox"  Exec exec firefox
+
+# disable auto-focusing on hovering
+Style * ClickToFocus, ClickToFocusPassesClick
+# set focus on clicking
+Style * MouseFocusClickRaises

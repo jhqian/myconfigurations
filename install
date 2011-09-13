@@ -1,0 +1,5 @@
+#!/bin/bash
+ln -s /home/b32804/pub_workspace/github/myvimfiles ~/.vim
+ln -s /home/b32804/pub_workspace/github/myfvwm ~/.fvwm
+ln -s /home/b32804/pub_workspace/github/myemacs ~/emacs
+ln -s /home/b32804/pub_workspace/github/myfonts ~/.fonts
