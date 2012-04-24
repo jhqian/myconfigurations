@@ -1,0 +1,51 @@
+#!/bin/bash
+
+LNX=~/workshop/linux
+CSHOME=~/cscope
+
+ARCHMXFAMILY=mach-mx6
+
+PWD=`pwd`
+
+cd $LNX
+# find . -path "./Documentation*" -prune \
+#	-o -path "./scripts*" -prune \
+#	-o -path "./tmp*" -prune \
+#	-o -path "./arch/*" ! -path "./arch/arm*" -prune \
+#	-o -path "./arch/arm/mach-*" ! -path "./arch/arm/$ARCHMXFAMILY*" -prune \
+#	-o -path "./drivers/*" ! -path "./drivers/mmc*" -prune \
+#	-o -path "./tools/perf*" -prune \
+#	-o -path "./arch/arm/lib*" -prune \
+#	-o -path "./arch/arm/plat-pxa*" -prune \
+#	-o -path "./arch/arm/plat-s*" -prune \
+#	-o -path "./arch/arm/plat-o*" -prune \
+#	-o -path "./arch/arm/plat-n*" -prune \
+#	-o -path "./arch/arm/plat-v*" -prune \
+#	-o -path "./arch/arm/configs*" -prune \
+#	-o -print | grep -E "*.[chxsS]" > $LNX/cscope.files
+#	-regextype 'posix-egrep' -regex '*\.[chxsS]$' -o -print
+#grep -E '*\.[chxsS]$'
+#	-name *.c -o -print
+#   -regextype "posix-egrep" -regex "*.[chxsS]$" -o -print
+#	-name *.[chxsS] -o -print
+#-o -print > $LNX/cscope.files
+
+#cd $LNX
+#cscope -b -q -k 
+find "$LNX/" -path "$LNX/arch/*" ! -path "$LNX/arch/arm*" -prune \
+	-o -path "$LNX/arch/arm/mach*" ! -path "$LNX/arch/arm/mach-mx5" -prune \
+	-o -path "$LNX/arch/arm/plat-s*" -prune \
+	-o -path "$LNX/arch/arm/plat-n*" -prune \
+	-o -path "$LNX/arch/arm/plat-o*" -prune \
+	-o -path "$LNX/arch/arm/plat-p*" -prune \
+	-o -path "$LNX/arch/arm/plat-v*" -prune \
+	-o -path "$LNX/arch/arm/plat-mxs*" -prune \
+	-o -path "$LNX/include/asm-*" ! -path "$LNX/include/asm-arm*" -prune \
+	-o -path "$LNX/include/crypto*" -prune \
+	-o -path "$LNX/tmp*" -prune \
+	-o -path "$LNX/crypto*" -prune \
+	-o -path "$LNX/Documentation*" -prune \
+	-o -path "$LNX/scripts*" -prune \
+	-o -path "$LNX/drivers/*" ! -path "$LNX/drivers/mmc*" -prune \
+	-o -name *.[chxsS] -print > $LNX/cscope.files
+cscope -b 

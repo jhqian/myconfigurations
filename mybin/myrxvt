@@ -1,0 +1,3 @@
+#!/bin/sh
+
+urxvt -tr -sh 40 -tint grey 2>/dev/null &

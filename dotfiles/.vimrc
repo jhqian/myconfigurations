@@ -161,9 +161,18 @@ set noswapfile
 
 syntax enable "Enable syntax hl
 
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+	" When editing a file, always jump to the last cursor position
+	autocmd BufReadPost *
+	\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+	\	exe "normal g'\"" |
+	\ endif
+endif
+
 " highlight over width text
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%76v.\+/
 
 " Fast vimrc is edited, reload it
 autocmd! bufwritepost vimrc source ~/.vimrc

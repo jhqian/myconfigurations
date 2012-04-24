@@ -31,3 +31,4 @@
     co = checkout
     df = diff
     lg = log -p
+    lt = log --oneline --decorate --graph

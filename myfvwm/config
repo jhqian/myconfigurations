@@ -16,7 +16,7 @@ Key l 	  A    SC    GoToPage 1 0
 Key u 	  A    SC    GoToPage 1 1
 
 Key e 	  A    SC    Exec exec emacs
-Key f 	  A    SC    Exec exec firefox
+Key f 	  A    SC    Exec exec myfirefox
 Key g 	  A    SC    Exec exec pidgin
 #Key x 	  A    SC    Exec exec xterm
 

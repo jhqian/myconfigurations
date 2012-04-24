@@ -1,5 +1,27 @@
 #!/bin/bash
-ln -s /home/b32804/pub_workspace/github/myvimfiles ~/.vim
-ln -s /home/b32804/pub_workspace/github/myfvwm ~/.fvwm
-ln -s /home/b32804/pub_workspace/github/myemacs ~/emacs
-ln -s /home/b32804/pub_workspace/github/myfonts ~/.fonts
+# for file in *
+# do
+# 	if [ -d "$file" ]; then
+# 		echo directory: $file
+# 	elif [ -f "$file" ]; then
+# 		echo regular file: $file
+# 		if [ "$file" == "README" ]; then
+# 			echo skip readme file
+# 		fi
+# 	fi
+# done
+if [ ! -d "$HOME/.vim" ]; then
+	ln -s "$HOME"/pub_workspace/github/myvimfiles "$HOME"/.vim
+fi
+if [ ! -d "$HOME/.fvwm" ]; then
+	ln -s "$HOME"/pub_workspace/github/myfvwm "$HOME"/.fvwm
+fi
+if [ ! -d "$HOME/emacs" ]; then
+	ln -s "$HOME"/pub_workspace/github/myemacs "$HOME"/emacs
+fi
+if [ ! -d "$HOME/.fonts" ]; then
+	ln -s "$HOME"/pub_workspace/github/myfonts "$HOME"/.fonts
+fi
+if [ ! -d "$HOME/bin" ]; then
+	ln -s "$HOME"/pub_workspace/github/mybin "$HOME"/bin
+fi
