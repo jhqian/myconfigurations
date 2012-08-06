@@ -172,7 +172,7 @@ endif
 
 " highlight over width text
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%76v.\+/
+match OverLength /\%79v.\+/
 
 " Fast vimrc is edited, reload it
 autocmd! bufwritepost vimrc source ~/.vimrc
@@ -296,7 +296,7 @@ inoremap <C-a> <Home>
 inoremap <C-e> <End>
 
 " Turn off/on with CTRL-N
-map <silent> <C-N> :set invhlsearch<CR>  
+"map <silent> <C-N> :set invhlsearch<CR>  
 
 " Turn off/on with CTRL-I
 map <silent> <C-i> :set invignorecase<CR>

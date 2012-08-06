@@ -1,0 +1,46 @@
+#!/bin/bash
+#export SOCKS_USERNAME=b32804
+output_directory=$HOME/Music
+PATH=$PATH:/usr/bin:$HOME/bin
+export PATH
+
+mon=`date +%m`
+day=`date +%d`
+year=`date +%Y`
+
+output_directory=${output_directory}/ezmorning/${year}
+if [ ! -d ${year} ];then
+	mkdir -p ${output_directory}
+fi
+
+day=`expr ${day} - 2`
+
+if [ $day -eq 1 ]; then
+	mon=`expr ${mon} - 1`
+	for d in {31..1}
+	do
+		r=`date -d $year$mon$day +%u`
+		if [ ${#r} -gt 1 ]; then
+			continue
+		fi
+		if [ $r -lt 7 ] && [ $r -gt 1 ];then
+			break
+		fi
+	done
+#else
+#	day=`expr ${day} - 1`
+fi
+if [ ${#day} -eq 1 ]; then
+	day=0$day
+fi
+
+for sect in a b c
+do
+	mimms mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma ${output_directory}/ezm_${mon}${day}${sect}.wma
+	if [ -e "${output_directory}/${mon}${day}${sect}.wma" ]; then
+		echo "converting ${output_directory}/${mon}${day}${sect}.wma"
+		bash -c "convertit ${output_directory}/${mon}${day}${sect}.wma"
+	else
+		echo ${output_directory}/${mon}${day}${sect}.wma does not exist
+	fi
+done
