@@ -114,9 +114,9 @@ set ruler           " show the cursor position all the time
 set incsearch       " do incremental searching
 " set et              " expand tab, use spaces
 set sm              " disp {[(
-set ts=4            " tabstop
-set softtabstop=4   " softtabstop
-set sw=4            " 
+set ts=8            " tabstop
+set softtabstop=8   " softtabstop
+set sw=8            " 
 set smarttab        " give spaces for tabstop
 set lbr
 set tw=500
@@ -366,3 +366,10 @@ set ignorecase smartcase " 搜索时忽略大小写,但在一个或以上大写�
 set noerrorbells " 关闭错误铃声
 set novisualbell " 关闭使用可视铃声
 set hidden " 允许在有位保存的修改时切换缓冲区,由vim负责保存
+
+hi StatusLineNC term=bold,reverse cterm=bold ctermfg=0 ctermbg=7 gui=bold guifg=blue guibg=white
+hi StatusLine term=bold,reverse cterm=bold ctermfg=8 ctermbg=4 gui=bold guifg=blue guibg=white
+
+" it will map Alt-< and Alt-> in Normal mode to upward and downward searching for lines with the same indent as the current line.
+nn <M-,> k:call search ("^". matchstr (getline (line (".")+ 1), '\(\s*\)') ."\\S", 'b')<CR>^
+nn <M-.> :call search ("^". matchstr (getline (line (".")), '\(\s*\)') ."\\S")<CR>^

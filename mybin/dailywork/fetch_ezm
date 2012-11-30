@@ -36,11 +36,11 @@ fi
 
 for sect in a b c
 do
-	mimms mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma ${output_directory}/ezm_${mon}${day}${sect}.wma
-	if [ -e "${output_directory}/${mon}${day}${sect}.wma" ]; then
-		echo "converting ${output_directory}/${mon}${day}${sect}.wma"
-		bash -c "convertit ${output_directory}/${mon}${day}${sect}.wma"
+	mimms -b 1048576 -r -t 240 mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma ${output_directory}/ezm_${mon}${day}${sect}.wma
+	if [ -e "${output_directory}/ezm_${mon}${day}${sect}.wma" ]; then
+		echo "converting ${output_directory}/ezm_${mon}${day}${sect}.wma"
+		bash -c "convertit ${output_directory}/ezm_${mon}${day}${sect}.wma"
 	else
-		echo ${output_directory}/${mon}${day}${sect}.wma does not exist
+		echo ${output_directory}/ezm_${mon}${day}${sect}.wma does not exist
 	fi
 done

@@ -1,5 +1,26 @@
 #!/bin/bash
 #export SOCKS_USERNAME=b32804
+
+function debug_info {
+	echo DBG: $1
+}
+
+function error_info {
+	echo ERR: $1
+}
+
+function usage {
+	echo NAME 
+	echo "    `basename $0` - fetch radio program and encode to mp3 files"
+	echo
+	echo SYNOPSIS 
+	echo "    `basename $0` DATE"
+	echo
+	echo DESCRIPTION
+	echo "    Fetch program on specified DATE, supported date format: MMDD, MDD, YYMMDD, YYYYMMDD"
+	echo 
+}
+
 output_directory=$HOME/Music
 PATH=$PATH:/usr/bin:$HOME/bin
 export PATH
@@ -8,14 +29,53 @@ mon=`date +%m`
 day=`date +%d`
 year=`date +%Y`
 
+if [ ! -z $1 ]; then
+	century=`date +%C`
+
+	given_date=$1
+
+	case ${#given_date} in
+		3 )
+			given_date=${year}0${given_date};;
+		4 )
+			given_date=${year}${given_date};;
+		6 )
+			given_date=${century}${given_date};;
+		8 )
+			given_date=${given_date};;
+		* )
+			error_info "the format of given date \"${given_date}\" can not be recognized."
+			echo
+			usage
+			exit
+			;;
+	esac
+
+	weekday=`date -d ${given_date} +%u 2>/dev/null`
+	if [ ! ${#weekday} -eq 1 ]; then
+		error_info "${given_date} is invalid date."
+		echo
+		usage
+		exit
+	fi
+
+	debug_info "${given_date} week day: $weekday"
+
+	mon=`date -d ${given_date} +%m`
+	day=`date -d ${given_date} +%d`
+
+fi
+
 output_directory=${output_directory}/feelgoodinc/${year}
 if [ ! -d ${year} ];then
 	mkdir -p ${output_directory}
 fi
 
-day=`expr ${day} - 2`
+if [ -z $1 ]; then
+	day=`expr ${day} - 2`
+fi
 
-if [ $day -eq 1 ]; then
+if [ $day -lt 1 ]; then
 	mon=`expr ${mon} - 1`
 	for d in {31..1}
 	do
@@ -38,10 +98,10 @@ sect=
 #for sect in a b c
 #do
 	mimms mms://media.chinabroadcast.cn/eng/music/feelg/${year}/fgi${mon}${day}${sect}.wma ${output_directory}/fgi_${mon}${day}${sect}.wma
-	if [ -e "${output_directory}/${mon}${day}${sect}.wma" ]; then
-		echo "converting ${output_directory}/${mon}${day}${sect}.wma"
-		bash -c "convertit ${output_directory}/${mon}${day}${sect}.wma"
+	if [ -e "${output_directory}/fgi_${mon}${day}${sect}.wma" ]; then
+		echo "converting ${output_directory}/fgi_${mon}${day}${sect}.wma"
+		bash -c "convertit ${output_directory}/fgi_${mon}${day}${sect}.wma"
 	else
-		echo ${output_directory}/${mon}${day}${sect}.wma does not exist
+		echo ${output_directory}/fgi_${mon}${day}${sect}.wma does not exist
 	fi
 #done
