@@ -97,7 +97,8 @@ fi
 sect=
 #for sect in a b c
 #do
-	mimms mms://media.chinabroadcast.cn/eng/music/feelg/${year}/fgi${mon}${day}${sect}.wma ${output_directory}/fgi_${mon}${day}${sect}.wma
+	#mimms mms://media.chinabroadcast.cn/eng/music/feelg/${year}/fgi${mon}${day}${sect}.wma ${output_directory}/fgi_${mon}${day}${sect}.wma
+	php /home/b32804/swtools/rtspdump/rtspdump.php -atcp -r rtsp://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma -o ${output_directory}/${mon}${day}${sect}.wma
 	if [ -e "${output_directory}/fgi_${mon}${day}${sect}.wma" ]; then
 		echo "converting ${output_directory}/fgi_${mon}${day}${sect}.wma"
 		bash -c "convertit ${output_directory}/fgi_${mon}${day}${sect}.wma"
