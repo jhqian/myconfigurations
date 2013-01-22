@@ -32,3 +32,4 @@
     df = diff
     lg = log -p
     lt = log --oneline --decorate --graph
+    lo = log --oneline

@@ -74,5 +74,3 @@ URxvt.color12: #AAAAFF
 URxvt.cursorColor: orange
 
 !Xcursor*theme: Neutral
-
-*backarrowKey: false
