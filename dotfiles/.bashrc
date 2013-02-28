@@ -259,4 +259,3 @@ export HISTIGNORE="&:ls:[bf]g:exit:reset"
 
 export PATH=$PATH:/sbin:/usr/bin:/usr/sbin
 
-

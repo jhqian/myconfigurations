@@ -314,10 +314,10 @@ set ofu=syntaxcomplete#Complete
 " set completeopt as don't show menu and preview
 set completeopt=longest,menu
 " Popup menu hightLight Group
-highlight Pmenu ctermbg=13 guibg=DarkGray
-highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
-highlight PmenuSbar ctermbg=7 guibg=DarkGray
-highlight PmenuThumb guibg=Black 
+" highlight Pmenu ctermbg=13 guibg=DarkGray
+" highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
+" highlight PmenuSbar ctermbg=7 guibg=DarkGray
+" highlight PmenuThumb guibg=Black 
 " use global scope search
 let OmniCpp_GlobalScopeSearch = 1
 " 0 = namespaces disabled
