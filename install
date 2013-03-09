@@ -11,17 +11,17 @@
 # 	fi
 # done
 if [ ! -d "$HOME/.vim" ]; then
-	ln -s "$HOME"/pub_workspace/github/myvimfiles "$HOME"/.vim
+	ln -s $HOME/pub_workspace/github/myvimfiles $HOME/.vim
 fi
-if [ ! -d "$HOME/.fvwm" ]; then
-	ln -s "$HOME"/pub_workspace/github/myfvwm "$HOME"/.fvwm
-fi
-if [ ! -d "$HOME/emacs" ]; then
-	ln -s "$HOME"/pub_workspace/github/myemacs "$HOME"/emacs
-fi
-if [ ! -d "$HOME/.fonts" ]; then
-	ln -s "$HOME"/pub_workspace/github/myfonts "$HOME"/.fonts
-fi
+#if [ ! -d "$HOME/.fvwm" ]; then
+#	ln -s $HOME/pub_workspace/github/myfvwm $HOME/.fvwm
+#fi
+#if [ ! -d "$HOME/emacs" ]; then
+#	ln -s $HOME/pub_workspace/github/myemacs $HOME/emacs
+#fi
+#if [ ! -d "$HOME/.fonts" ]; then
+#	ln -s $HOME/pub_workspace/github/myfonts $HOME/.fonts
+#fi
 if [ ! -d "$HOME/bin" ]; then
-	ln -s "$HOME"/pub_workspace/github/mybin "$HOME"/bin
+	ln -s $HOME/pub_workspace/github/mybin $HOME/bin
 fi

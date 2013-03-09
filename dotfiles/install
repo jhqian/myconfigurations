@@ -1,6 +1,14 @@
 #!/bin/bash
-ln -s /home/b32804/pub_workspace/github/dotfiles/.gitconfig   ~/.gitconfig  
-ln -s /home/b32804/pub_workspace/github/dotfiles/.Xdefaults   ~/.Xdefaults  
-ln -s /home/b32804/pub_workspace/github/dotfiles/.Xresources  ~/.Xresources 
-ln -s /home/b32804/pub_workspace/github/dotfiles/.emacs       ~/.emacs
-ln -s /home/b32804/pub_workspace/github/dotfiles/.vimrc       ~/.vimrc
+#ln -s /home/b32804/pub_workspace/github/dotfiles/.gitconfig   ~/.gitconfig  
+#ln -s /home/b32804/pub_workspace/github/dotfiles/.Xdefaults   ~/.Xdefaults  
+#ln -s /home/b32804/pub_workspace/github/dotfiles/.Xresources  ~/.Xresources 
+#ln -s /home/b32804/pub_workspace/github/dotfiles/.emacs       ~/.emacs
+#ln -s /home/b32804/pub_workspace/github/dotfiles/.vimrc       ~/.vimrc
+
+pwd=`pwd`
+for i in `find . -name '.*'`
+do
+	if [ ! -d $i ]; then
+		echo $pwd/`basename $i`
+	fi
+done
