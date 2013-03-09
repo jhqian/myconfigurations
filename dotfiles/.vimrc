@@ -373,3 +373,41 @@ hi StatusLine term=bold,reverse cterm=bold ctermfg=8 ctermbg=4 gui=bold guifg=bl
 " it will map Alt-< and Alt-> in Normal mode to upward and downward searching for lines with the same indent as the current line.
 nn <M-,> k:call search ("^". matchstr (getline (line (".")+ 1), '\(\s*\)') ."\\S", 'b')<CR>^
 nn <M-.> :call search ("^". matchstr (getline (line (".")), '\(\s*\)') ."\\S")<CR>^
+
+" first, enable status line always
+set laststatus=2
+
+" now set it up to change the status line based on mode
+if version >= 700
+	au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
+	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+endif
+
+function! InsertStatuslineColor(mode)
+	if a:mode == 'i'
+		hi statusline guibg=magenta
+	elseif a:mode == 'r'
+		hi statusline guibg=blue
+	else
+		hi statusline guibg=red
+	endif
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+au InsertChange * call InsertStatuslineColor(v:insertmode)
+au InsertLeave * hi statusline guibg=green
+
+" default the statusline to green when entering Vim
+hi statusline guibg=green
+
+if &term =~ '^xterm'
+	" solid underscore
+	let &t_SI .= "\<Esc>[4 q"
+	" solid block
+	let &t_EI .= "\<Esc>[2 q"
+	" 1 or 0 -> blinking block
+	" 3 -> blinking underscore
+	" Recent versions of xterm (282 or above) also support
+	" 5 -> blinking vertical bar
+	" 6 -> solid vertical bar
+endif

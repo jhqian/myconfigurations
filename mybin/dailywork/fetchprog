@@ -1,3 +1,4 @@
 #!/bin/bash
+killall mimms
 bash -c /home/b32804/bin/dailywork/fetch_fgi
 bash -c /home/b32804/bin/dailywork/fetch_ezm
