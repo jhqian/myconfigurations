@@ -20,7 +20,7 @@ startup_message off
 shell -$SHELL
 
 # auto-log
-logfile $HOME/lib/screen-logs/%Y%m%d-%n.log
+logfile $HOME/logs/screen-logs/%Y%m%d-%n.log
 deflog on
 
 vbell off

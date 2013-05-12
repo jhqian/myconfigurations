@@ -11,7 +11,7 @@ if has("gui_running")
     colorscheme ps_color
     set nonu
 else
-    colorscheme koehler
+    colorscheme desert
     set background=dark
     set nonu
 endif
@@ -112,11 +112,11 @@ set nowrap          " no wrap
 set showcmd         " display incomplete commands
 set ruler           " show the cursor position all the time
 set incsearch       " do incremental searching
-" set et              " expand tab, use spaces
+set et              " expand tab, use spaces
 set sm              " disp {[(
-set ts=8            " tabstop
-set softtabstop=8   " softtabstop
-set sw=8            " 
+set ts=4            " tabstop
+set softtabstop=4   " softtabstop
+set sw=4            " 
 set smarttab        " give spaces for tabstop
 set lbr
 set tw=500
@@ -400,14 +400,24 @@ au InsertLeave * hi statusline guibg=green
 " default the statusline to green when entering Vim
 hi statusline guibg=green
 
-if &term =~ '^xterm'
-	" solid underscore
-	let &t_SI .= "\<Esc>[4 q"
-	" solid block
-	let &t_EI .= "\<Esc>[2 q"
-	" 1 or 0 -> blinking block
-	" 3 -> blinking underscore
-	" Recent versions of xterm (282 or above) also support
-	" 5 -> blinking vertical bar
-	" 6 -> solid vertical bar
+if has("terminfo")
+    let &t_Co=16
+    let &t_AB="\<Esc>[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm"
+    let &t_AF="\<Esc>[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm"
+else
+    let &t_Co=16
+    let &t_Sf="\<Esc>[3%dm"
+    let &t_Sb="\<Esc>[4%dm"
+endif
+
+if &term =~ "xterm"
+    if has("terminfo")
+        let &t_Co=8
+        let &t_Sf="\<Esc>[3%p1%dm"
+        let &t_Sb="\<Esc>[4%p1%dm"
+    else
+        let &t_Co=8
+        let &t_Sf="\<Esc>[3%dm"
+        let &t_Sb="\<Esc>[4%dm"
+    endif
 endif

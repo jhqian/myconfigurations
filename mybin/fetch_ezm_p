@@ -1,0 +1,135 @@
+#!/bin/bash
+output_directory=$HOME/Music
+PATH=$PATH:/usr/bin:$HOME/bin
+export PATH
+
+function debug_info {
+	echo DBG: $1
+}
+
+function error_info {
+	echo ERR: $1
+}
+
+function usage {
+	echo NAME 
+	echo "    `basename $0` - fetch feiyu show and encode to mp3 files"
+	echo
+	echo SYNOPSIS 
+	echo "    `basename $0` DATE"
+	echo
+	echo DESCRIPTION
+	echo "    Fetch program on specified DATE, supported date format: MMDD, MDD, YYMMDD, YYYYMMDD"
+	echo 
+}
+
+mon=`date +%m`
+day=`date +%d`
+year=`date +%Y`
+century=`date +%C`
+
+if [ -z $1 ]; then
+	echo "`basename $0`: missing date"
+	echo
+	usage
+	exit
+fi
+
+given_date=$1
+
+case ${#given_date} in
+	3 )
+		given_date=${year}0${given_date};;
+	4 )
+		given_date=${year}${given_date};;
+	6 )
+		given_date=${century}${given_date};;
+	8 )
+		given_date=${given_date};;
+	* )
+		error_info "the format of given date \"${given_date}\" can not be recognized."
+		echo
+		usage
+		exit
+		;;
+esac
+
+weekday=`date -d ${given_date} +%u 2>/dev/null`
+if [ ! ${#weekday} -eq 1 ]; then
+	error_info "${given_date} is invalid date."
+	echo
+	usage
+	exit
+fi
+
+debug_info "${given_date} week day: $weekday"
+
+mon=`date -d ${given_date} +%m`
+day=`date -d ${given_date} +%d`
+output_directory=${output_directory}/ezmorning/${year}
+
+fetch_and_encode() {
+	mimms -b 1048576 -r -t 240 $1 $2
+	#cvlc $1 --sout=$2
+	#php /home/b32804/swtools/rtspdump/rtspdump.php -atcp -v -r mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma -o ${output_directory}/ezm_${mon}${day}${sect}.wma
+	#mplayer -dumpstream mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma -dumpfile ${output_directory}/ezm_${mon}${day}${sect}.wma
+	if [ -e "$2" ]; then
+		echo "converting $2"
+		bash -c "convertit $2"
+	else
+		echo $2 does not exist
+	fi
+}
+
+function proceed { 
+	mon=$1
+	day=$2
+	year=$3
+	output_directory=$4
+	debug_info "${day}/${mon}/${year} to $output_directory"
+
+	if [ ! -d ${output_directory} ];then
+		mkdir -p ${output_directory}
+	fi
+
+<<NO_NEED_ANY_MORE
+	if [ $day -eq 1 ]; then
+		mon=`expr ${mon} - 1`
+		for d in {31..1}
+		do
+			r=`date -d $year$mon$day +%u`
+			if [ ${#r} -gt 1 ]; then
+				continue
+			fi
+			if [ $r -lt 7 ] && [ $r -gt 1 ];then
+				break
+			fi
+		done
+	#else
+	#	day=`expr ${day} - 1`
+	fi
+NO_NEED_ANY_MORE
+
+	if [ ${#day} -lt 1 ]; then
+		day=0$day
+	fi
+
+	for sect in a b c
+	do
+		fetch_and_encode mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma ${output_directory}/ezm_${mon}${day}${sect}.wma &
+<<NO_NEED_ANY_MORE
+		#mimms -b 1048576 -r -v mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma ${output_directory}/ezm_${mon}${day}${sect}.wma
+		cvlc mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma --sout=${output_directory}/ezm_${mon}${day}${sect}.wma
+		#php /home/b32804/swtools/rtspdump/rtspdump.php -atcp -v -r mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma -o ${output_directory}/ezm_${mon}${day}${sect}.wma
+		#mplayer -dumpstream mms://media.chinabroadcast.cn/eng/music/morning/${year}/${mon}${day}${sect}.wma -dumpfile ${output_directory}/ezm_${mon}${day}${sect}.wma
+		if [ -e "${output_directory}/ezm_${mon}${day}${sect}.wma" ]; then
+			echo "converting ${output_directory}/ezm_${mon}${day}${sect}.wma"
+			bash -c "convertit ${output_directory}/ezm_${mon}${day}${sect}.wma"
+		else
+			echo ${output_directory}/ezm_${mon}${day}${sect}.wma does not exist
+		fi
+NO_NEED_ANY_MORE
+	done
+}
+
+proceed $mon $day $year $output_directory
