@@ -20,9 +20,10 @@ do
 		fi
 		if [ `basename $i` == ".bashrc" ]; then
             lnk_name=.mybashrc
-            echo "if [ -f ~/$lnk_name ]; then" >> ~/.bashrc
-            echo "    . ~/$lnk_name ]" >> ~/.bashrc
-            echo "fi" >> ~/.bashrc
+            tgt_name=~/.bashrc
+            echo "if [ -f ~/$lnk_name ]; then" >> $tgt_name
+            echo "    . ~/$lnk_name ]" >> $tgt_name
+            echo "fi" >> $tgt_name
         else
             lnk_name=`basename $i`
 		fi
