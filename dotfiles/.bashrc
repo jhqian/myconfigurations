@@ -243,7 +243,7 @@ export ALTERNATE_EDITOR=""
 if [ "$PS1" != "" -a "${STARTED_SCREEN:-x}" = x -a "${SSH_TTY:-x}" != x ]; then
 	STARTED_SCREEN=1
 	export STARTED_SCREEN
-	[ -d $HOME/lib/screen-logs ] || mkdir -p $HOME/lib/screen-logs
+	[ -d $HOME/logs/screen-logs ] || mkdir -p $HOME/logs/screen-logs
 	sleep 1
 	screen -RR && exit 0
 	# normally, execution of this rc script ends here...

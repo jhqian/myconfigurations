@@ -9,6 +9,28 @@ pwd=`pwd`
 for i in `find . -name '.*'`
 do
 	if [ ! -d $i ]; then
-		echo $pwd/`basename $i`
+		if [ `basename $i` == ".emacs" ]; then
+			continue
+		fi
+		if [ `basename $i` == ".Xdefaults" ]; then
+			continue
+		fi
+		if [ `basename $i` == ".Xresources" ]; then
+			continue
+		fi
+		if [ `basename $i` == ".bashrc" ]; then
+            lnk_name=.mybashrc
+            echo "if [ -f ~/$lnk_name ]; then" >> ~/.bashrc
+            echo "    . ~/$lnk_name ]" >> ~/.bashrc
+            echo "fi" >> ~/.bashrc
+        else
+            lnk_name=`basename $i`
+		fi
+        if [ -f $HOME/$lnk_name ]; then
+            echo "$HOME/$lnk_name already exists, skip"
+            continue
+        fi
+		echo ls -s $pwd/`basename $i` $HOME/$lnk_name
+		ln -s $pwd/`basename $i` $HOME/$lnk_name
 	fi
 done

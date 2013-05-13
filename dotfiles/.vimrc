@@ -11,7 +11,8 @@ if has("gui_running")
     colorscheme ps_color
     set nonu
 else
-    colorscheme desert
+    colorscheme aqua
+    " colorscheme desert
     set background=dark
     set nonu
 endif
