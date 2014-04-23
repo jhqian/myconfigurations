@@ -22,7 +22,7 @@ do
             lnk_name=.mybashrc
             tgt_name=~/.bashrc
             echo "if [ -f ~/$lnk_name ]; then" >> $tgt_name
-            echo "    . ~/$lnk_name ]" >> $tgt_name
+            echo "    . ~/$lnk_name" >> $tgt_name
             echo "fi" >> $tgt_name
         else
             lnk_name=`basename $i`
