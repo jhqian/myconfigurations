@@ -4,7 +4,7 @@
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-export TERM=xterm-color
+export TERM=xterm-256color
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -31,6 +31,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
+    screen) color_prompt=yes;;
     xterm-color) color_prompt=yes;;
 esac
 
@@ -51,9 +52,12 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
+    PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]\[\033[01;34m\] \$\[\033[00m\] '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\u@\h\ \w$(__git_ps1) \$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -62,15 +66,6 @@ if [ -n "${SSH_CLIENT}" ]; then
 	PS1='[${ipaddr}] '$PS1
 fi
 
-# If this is an xterm set the title to user@host:dir
-#case "$TERM" in
-#xterm*|rxvt*)
-#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#    ;;
-#*)
-#    ;;
-#esac
-#
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -87,6 +82,7 @@ fi
 alias ll='ls -lF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lt='ll -X'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -146,15 +142,7 @@ bakwht='\e[47m' # White
 
 txtrst='\e[0m'  # Text Reset
 
-
-#export PATH=$PATH:~/bin:~/bin/linux-infra/tools:~/bin/linux-infra/hooks:~/bin/arm-fsl-linux-gnueabi/bin:~/emacs/site-start.d/cflow/src/
-export PATH=$PATH:~/bin:~/tools/linux-infra/tools:~/tools/linux-infra/hooks:~/swtools/android-sdk-linux/platform-tools:~/swtools/ImageMagick-6.8.0-8/utilities
-#export PS1="\[\e[0m\][\[\e[0;32m\]\t \[\e[1;34m\]\u@\h \[\e[1;37m\]\w\[\e[0;33m\]$(__git_ps1 " (%s)")\[\e[0m\]]$ "
-#export PS1="\[\e[0m\][\[\e[0;32m\]\t \[\e[1;34m\]\u@\h \[\e[1;37m\]\w\[\e[0;33m\]\[\e[0m\]]$ "
-#export PS1="\[\e[0m\][\[\e[1;34m\]\u@\h \[\e[1;37m\]\w\[\e[0;33m\]$(__git_ps1 " (%s)")\[\e[0m\]]$ "
-#export PS1="\[$txtrst\][\[$bldpur\]\u@\h \[$txtwht\]\w\[$ylw\]\[$txtrst\]]$ "
-
-#export CROSS_COMPILE=arm-fsl-linux-gnueabi-
+export CROSS_COMPILE=arm-fsl-linux-gnueabi-
 export TERM="xterm"
 export CSCOPE_DB="cscope.out"
 export HISTIGNORE="&:ls:[bf]g:exit:reset"
@@ -169,86 +157,21 @@ alias getmeandroid='cd ~/workshop/android'
 
 export ALTERNATE_EDITOR=""
 
-#RED="\[\033[0;31m\]"
-#YELLOW="\[\033[0;33m\]"
-#GREEN="\[\033[0;32m\]"
-#BLUE="\[\033[0;34m\]"
-#LIGHT_RED="\[\033[1;31m\]"
-#LIGHT_GREEN="\[\033[1;32m\]"
-#WHITE="\[\033[1;37m\]"
-#LIGHT_GRAY="\[\033[0;37m\]"
-#COLOR_NONE="\[\e[0m\]"
-#
-#function parse_git_branch {
-#	git rev-parse --git-dir &> /dev/null
-#	git_status="$(git status 2> /dev/null)"
-#	branch_pattern="^# On branch ([^${IFS}]*)"
-#	detached_branch_pattern="# Not currently on any branch"
-#	remote_pattern="# Your branch is (.*) of"
-#	diverge_pattern="# Your branch and (.*) have diverged"
-#	if [[ ${git_status}} =~ "Changed but not updated" ]]; then
-#		#state="${RED}⚡"
-#		state="⚡"
-#	fi
-#	# add an else if or two here if you want to get more specific
-#	if [[ ${git_status} =~ ${remote_pattern} ]]; then
-#		if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-#			#remote="${YELLOW}↑"
-#			remote="↑"
-#		else
-#			#remote="${YELLOW}↓"
-#			remote="↓"
-#		fi
-#	fi
-#	if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-#		#remote="${YELLOW}↕"
-#		remote="↕"
-#	fi
-#	if [[ ${git_status} =~ ${branch_pattern} ]]; then
-#		branch=${BASH_REMATCH[1]}
-#	elif [[ ${git_status} =~ ${detached_branch_pattern} ]]; then
-#		branch="${YELLOW}NO BRANCH"
-#	fi
-#
-#	if [[ ${#state} -gt "0" || ${#remote} -gt "0" ]]; then
-#		s=" "
-#	fi
-#
-#	echo "${branch}${s}${remote}${state}"
-#}
-#
-#function prompt_func() {
-#	git rev-parse --git-dir > /dev/null 2>&1
-#	if [ $? -eq 0 ]; then
-#		prompt='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] [$(parse_git_branch)]'
-#		if [ -n $ipaddr ]; then
-#			PS1="[$ipaddr] ${prompt}$ "
-#		else
-#			PS1="${prompt}$ "
-#		fi
-#	else
-#		PS1=$PSAVE
-#	fi
-#}
-#
-#export PSAVE=$PS1
-#
-#PROMPT_COMMAND=prompt_func
-
 # Auto-screen invocation. see: http://taint.org/wk/RemoteLoginAutoScreen
 # if we're coming from a remote SSH connection, in an interactive session
 # then automatically put us into a screen(1) session. Only try once --
 # if $STARTED_SCREEN is set, don't try it again, to avoid looping 
 # if screen fails for some reason.
-if [ "$PS1" != "" -a "${STARTED_SCREEN:-x}" = x -a "${SSH_TTY:-x}" != x ]; then
-	STARTED_SCREEN=1
-	export STARTED_SCREEN
-	[ -d $HOME/logs/screen-logs ] || mkdir -p $HOME/logs/screen-logs
-	sleep 1
-	screen -RR && exit 0
-	# normally, execution of this rc script ends here...
-	echo "Screen failed! continuing with normal bash startup"
-fi
+# if [ "$PS1" != "" -a "${STARTED_SCREEN:-x}" = x -a "${SSH_TTY:-x}" != x ]; then
+
+# 	STARTED_SCREEN=1
+# 	export STARTED_SCREEN
+# 	[ -d $HOME/logs/screen-logs ] || mkdir -p $HOME/logs/screen-logs
+# 	sleep 1
+# 	screen -RR && exit 0
+# 	# normally, execution of this rc script ends here...
+# 	echo "Screen failed! continuing with normal bash startup"
+# fi
 # end of auto-screen snippet
 
 if [ -e "%HOME/cronlogs/offlineimap.log" ]; then
@@ -257,5 +180,11 @@ fi
 
 export HISTIGNORE="&:ls:[bf]g:exit:reset"
 
-export PATH=$PATH:/sbin:/usr/bin:/usr/sbin
+export PATH=$PATH:/sbin:/usr/bin:/usr/sbin:~/bin:~/tools/linux-infra/tools:~/tools/linux-infra/hooks:~/swtools/android-sdk-linux/platform-tools:~/swtools/ImageMagick-6.8.0-8/utilities
 
+export VISUAL=vim
+export EDITOR=vim
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+export TOOLCHAIN_ROOTDIR=/home/b32804/tools/Sourcery_CodeBench_Lite_for_ARM_EABI
+export PATH=$PATH:/home/b32804/tools/Sourcery_CodeBench_Lite_for_ARM_EABI/bin/

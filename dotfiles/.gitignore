@@ -3,3 +3,5 @@ cscope.*
 *.o
 *.cmd
 *.nb*
+todel/*
+*.bak
