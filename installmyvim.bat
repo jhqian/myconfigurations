@@ -6,10 +6,15 @@ if {"%VIM%"}=={} (
     goto end
 )
 
-if exist "%VIM%\_vimrc" (
-    del "%VIM%\_vimrc" /F /S /Q
+if exist "%VIM%\gvimrc" (
+    del "%VIM%\gvimrc" /F /S /Q
 )
-copy "vim\.vimrc" "%VIM%\_vimrc"
+
+if exist "%VIM%\vimrc" (
+    del "%VIM%\vimrc" /F /S /Q
+)
+copy "vim\.vimrc" "%VIM%\vimrc"
+copy "vim\_gvimrc" "%VIM%\gvimrc"
 
 if exist "%VIM%\vimfiles" (
     rd "%VIM%\vimfiles" /S /Q
