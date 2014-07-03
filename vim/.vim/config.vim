@@ -2,6 +2,11 @@ filetype off
 filetype plugin on
 filetype indent on
 
+syntax enable
+set background=dark
+
+set lazyredraw              " redraw only when we need to
+
 set hidden
 
 set guioptions=-
@@ -33,7 +38,7 @@ set undofile
 
 syntax on
 set ruler
-set cursorline
+" set cursorline
 set ttyfast
 
 set wildmenu
@@ -44,7 +49,7 @@ set autoindent smartindent
 " Sane searching
 set hlsearch
 set incsearch
-set showmatch
+set showmatch                   " highlight matching [{()}]
 
 set cmdheight=2
 set showcmd
@@ -82,3 +87,12 @@ au InsertLeave * hi statusline guibg=green
 " default the statusline to green when entering Vim
 " hi statusline guibg=green
 
+" toggle between number and relative number
+function! ToggleNumber()
+    if (&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
+endfunc

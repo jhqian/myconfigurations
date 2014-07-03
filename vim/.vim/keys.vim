@@ -50,3 +50,6 @@ nnoremap <C-Down> <C-w>-<C-w>-
 nnoremap <leader>1 :TlistToggle<CR>
 nnoremap <leader>2 :TagbarToggle<CR>
 
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
