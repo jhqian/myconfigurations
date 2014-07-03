@@ -25,3 +25,12 @@
 [submodule "vim/.vim/bundle/neocomplcache.vim"]
 	path = vim/.vim/bundle/neocomplcache.vim
 	url = git://github.com/Shougo/neocomplcache.vim.git
+[submodule "vim/.vim/bundle/badwolf"]
+	path = vim/.vim/bundle/badwolf
+	url = https://github.com/sjl/badwolf.git
+[submodule "vim/.vim/bundle/ctrlp.vim"]
+	path = vim/.vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/.vim/bundle/molokai"]
+	path = vim/.vim/bundle/molokai
+	url = https://github.com/tomasr/molokai.git
