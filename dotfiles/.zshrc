@@ -64,4 +64,11 @@ alias 'la=ls -A'
 alias 'll=ls -l'
 alias 'grep=grep --color'
 
+export PATH=/bin:/usr/bin:/usr/local/bin
 export PATH=$PATH:$HOME/bin
+
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.zsh
+
+if [ -e "$HOME/.mintty/sol.dark" ]; then
+    source "$HOME/.mintty/sol.dark"
+fi

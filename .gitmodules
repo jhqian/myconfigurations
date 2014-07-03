@@ -34,3 +34,6 @@
 [submodule "vim/.vim/bundle/molokai"]
 	path = vim/.vim/bundle/molokai
 	url = https://github.com/tomasr/molokai.git
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
