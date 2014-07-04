@@ -33,6 +33,7 @@ fi
 case "$TERM" in
     screen) color_prompt=yes;;
     xterm-color) color_prompt=yes;;
+    xterm-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -188,3 +189,6 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 
 export TOOLCHAIN_ROOTDIR=/home/b32804/tools/Sourcery_CodeBench_Lite_for_ARM_EABI
 export PATH=$PATH:/home/b32804/tools/Sourcery_CodeBench_Lite_for_ARM_EABI/bin/
+
+# set umask
+umask 027
