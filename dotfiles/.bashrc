@@ -144,7 +144,6 @@ bakwht='\e[47m' # White
 txtrst='\e[0m'  # Text Reset
 
 export CROSS_COMPILE=arm-fsl-linux-gnueabi-
-export TERM="xterm"
 export CSCOPE_DB="cscope.out"
 export HISTIGNORE="&:ls:[bf]g:exit:reset"
 
