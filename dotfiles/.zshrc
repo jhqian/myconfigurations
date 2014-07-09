@@ -1,74 +1,83 @@
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
 
-# Skip all this for non-interative shells
-[[ -z "$PS1" ]] && return
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="gentoo"
 
-# Set prompt (white and purple, nothing too fancy)
-#PS1=$'%{\e[0;37m%}%B%*%b %{\e[0;35m%}%m:%{\e[0;37m%}%~ %(!.#.>) %{\e[00m%}'
-# Fancier prompt
-PS1=$'%F{def}%(?..%B%K{red}[%?]%K{def}%b )%(1j.%b%K{yel}%F{bla}%jJ%F{def}%K{def} .)%F{white}%B%*%b %F{m}%m:%F{white}%~ %(!.#.>) %F{def}' 
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-if [[ -x $(which vim) ]]
-then
-    export EDITOR="vim"
-    export USE_EDITOR=$EDITOR
-    export VISUAL=$EDITOR
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a iTerm"'
 fi
 
-export HISTIGNORE="&:ls:[bf]g:exit:reset:clear:cd ..:cd..:cd -"
-export HISTSIZE=25000
-export HISTFILE=~/.zsh_history
-export SAVEHIST=10000
-setopt INC_APPEND_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_REDUCE_BLANKS
-setopt HIST_VERIFY
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# Say how long a command took, if it took more than 30 seconds
-export REPORTTIME=30
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Zsh spelling correction options
-#setopt CORRECT
-#setopt DVORACK
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Prompts for confirmation after 'rm *' etc
-# Helps avoid mistakes like 'rm * o' when 'rm *.o' was intended
-setopt RM_STAR_WAIT
+export TERM=xterm-256color
 
-# Background processes aren't killed on exit of shell
-#setopt AUTO_CONTINUE
-
-# Don't write over existing files with >, use >! instead
-setopt NOCLOBBER
-
-# Don't nice background processes
-#setopt NO_BG_NICE
-
-# Watch other user login/out
-#watch=notme
-#export LOGCHECK=60
-
-# Enable color support of ls
-if [[ "$TERM" != "dumb" ]]; then
-    if [[ -x `which dircolors` ]]; then
-        eval `dircolors -b`
-        alias 'ls=ls --color=auto'
-    fi
-fi
-
-export TIME_STYLE="long-iso"
-
-# Short command aliases
-alias 'ls=ls --color'
-alias 'la=ls -A'
-alias 'll=ls -l'
-alias 'grep=grep --color'
-
-export PATH=/bin:/usr/bin:/usr/local/bin
-export PATH=$PATH:$HOME/bin
-
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.zsh
-
-if [ -e "$HOME/.mintty/sol.dark" ]; then
-    source "$HOME/.mintty/sol.dark"
-fi
