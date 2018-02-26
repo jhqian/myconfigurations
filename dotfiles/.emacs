@@ -1,1 +1,0 @@
-(mapc 'load (directory-files "~/emacs/site-start.d/" t "\\.el$"))

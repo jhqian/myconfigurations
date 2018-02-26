@@ -1,9 +1,0 @@
-#!/bin/bash
-#geo=1024x768
-geo=1280x1024
-
-#depth=16
-depth=24
-
-vncserver -geometry $geo -depth $depth
-

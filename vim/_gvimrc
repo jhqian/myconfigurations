@@ -1,2 +1,0 @@
-set lines=999 columns=999
-au GUIEnter * simalt ~X
