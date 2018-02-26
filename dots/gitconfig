@@ -1,0 +1,69 @@
+[user]
+    name = Ryan QIAN
+    email = jianghao.qian@nxp.com 
+	signingkey = 2EFFDF9D0C0F7CCB
+ #   name = Jimmy Chen
+ #   email = jimmy.chen@freescale.com 
+[core]
+    autocrlf = false
+    safecrlf = false
+    whitespace=fix, -indent-with-non-tab, trailing-space, cr-at-eol
+    excludefiles=~/.gitignore
+	editor = vim
+	trustctime = false
+	filemode = false
+#	gitproxy = gitproxy
+
+[color]
+    ui = auto
+[color "branch"]
+    current = green
+    local = yellow
+    remote = blue 
+[color "diff"]
+    meta = yellow bold
+    frag = red bold
+    new = green bold
+    whitespace = red
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[alias]
+    commitme = commit --no-verify
+    cleanallsub = submodule foreach --recursive git clean -xfd
+    resetallsub = submodule foreach --recursive git reset --hard HEAD
+    st = status
+    stu = status -uno
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    lg = log -p
+    lt = log --oneline --decorate --graph
+    lo = log --oneline
+    ls = log --stat
+    lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	last = log -1 --stat
+	cp = cherry-pick
+	cl = clone
+	unstage = reset HEAD --
+	dc = diff --cached
+[push]
+	default = current
+
+[oh-my-zsh]
+    hide-status = 1
+[merge]
+	tool = vimdiff
+	prompt = false
+	conflictstyle = diff3
+	renamelimit = 10000
+[credential]
+	helper = cache --timeout=3600
+[mergetool]
+	keeptemporaries = false
+	keepbackups = false
+	prompt = false
+	trustexitcode = false
