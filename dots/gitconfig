@@ -5,7 +5,7 @@
  #   name = Jimmy Chen
  #   email = jimmy.chen@freescale.com 
 [core]
-    autocrlf = false
+    autocrlf = input
     safecrlf = false
     whitespace=fix, -indent-with-non-tab, trailing-space, cr-at-eol
     excludefiles=~/.gitignore
@@ -50,6 +50,7 @@
 	cl = clone
 	unstage = reset HEAD --
 	dc = diff --cached
+    stf = status -uno --ignore-submodules
 [push]
 	default = current
 
