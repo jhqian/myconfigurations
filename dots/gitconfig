@@ -50,7 +50,8 @@
 	cl = clone
 	unstage = reset HEAD --
 	dc = diff --cached
-    stf = status -uno --ignore-submodules
+    stf = status --ignore-submodules
+    dff = diff --ignore-submodules=all
 [push]
 	default = current
 
