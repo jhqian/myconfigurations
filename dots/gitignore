@@ -9,3 +9,8 @@ venv
 node_modules
 .sass-cache
 cscope.*
+.~lock.*
+.gdbinit
+*.jpeg
+*.jpg
+*.bin

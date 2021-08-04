@@ -1,6 +1,6 @@
 [user]
     name = Ryan QIAN
-    email = jianghao.qian@nxp.com 
+    email = jianghao.qian@hpmicro.com 
 	signingkey = 2EFFDF9D0C0F7CCB
  #   name = Jimmy Chen
  #   email = jimmy.chen@freescale.com 
@@ -8,7 +8,7 @@
     autocrlf = input
     safecrlf = false
     whitespace=fix, -indent-with-non-tab, trailing-space, cr-at-eol
-    excludefiles=~/.gitignore
+    excludesFile=~/.gitignore
 	editor = vim
 	trustctime = false
 	filemode = false
