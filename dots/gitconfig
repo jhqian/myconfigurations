@@ -35,7 +35,9 @@
     cleanallsub = submodule foreach --recursive git clean -xfd
     resetallsub = submodule foreach --recursive git reset --hard HEAD
     st = status
-    stu = status -uno
+    sts = status -s
+    stu = st -uno
+    stsu = sts -uno
     ci = commit
     br = branch
     co = checkout
@@ -69,3 +71,5 @@
 	keepbackups = false
 	prompt = false
 	trustexitcode = false
+[http]
+	sslVerify = false
