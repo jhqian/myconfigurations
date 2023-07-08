@@ -1,0 +1,6 @@
+defscrollback 9999
+
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.gW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+startup_message off
